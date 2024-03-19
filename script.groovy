@@ -29,7 +29,9 @@ pipeline {
                 script {
                     // Copy built artifacts to EC2 instance
                     sshagent(['ubuntuid']) {
+                        echo "Before rsync command"
                         sh 'rsync -avz -e "ssh -o StrictHostKeyChecking=no" /var/lib/jenkins/workspace/student-app/target/studentapp-2.2-SNAPSHOT.war root@ip-172-31-13-217:/opt/apache-tomcat-9.0.87/webapps/studentapp-2.2-SNAPSHOT.war'
+                        echo "After rsync command"
                     }
                 }
             }
