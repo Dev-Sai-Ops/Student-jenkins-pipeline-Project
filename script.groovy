@@ -24,11 +24,16 @@ pipeline {
             }
         } 
 
-        stage('Deploy') {
+        stage('Deploy to EC2') {
             steps {
-                echo 'Deploy done'
+                script {
+                    sshagent(['ubuntuid']) {
+                        sh 'scp /var/lib/jenkins/workspace/student-app/target/*.war ubuntu@ip-172-31-13-217:/opt/apache-tomcat-9.0.87/webapps'
+                    }
+                }
             }
         }
+
 
     }
 }
