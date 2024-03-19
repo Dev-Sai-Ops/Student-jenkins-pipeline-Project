@@ -27,18 +27,14 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 script {
-                    // Copy built artifacts to EC2 instance using ssh with a here document
+                    // Copy built artifacts to EC2 instance
                     sshagent(['ubuntuid']) {
-                        sh """
-                            ssh -o StrictHostKeyChecking=no root@ip-172-31-13-217 << 'EOF'
-                            cat > /opt/apache-tomcat-9.0.87/webapps/studentapp-2.2-SNAPSHOT.war << EOF2
-                            $(cat /var/lib/jenkins/workspace/student-app/target/studentapp-2.2-SNAPSHOT.war)
-                            EOF2
-                            EOF
-                        """
+                        sh 'scp -v /var/lib/jenkins/workspace/student-app/target/studentapp-2.2-SNAPSHOT.war root@ip-172-31-13-217:/opt/apache-tomcat-9.0.87/webapps'
                     }
                 }
             }
         }
+
+
     }
 }
