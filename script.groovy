@@ -29,7 +29,7 @@ pipeline {
                 script {
                     // Copy built artifacts to EC2 instance
                     sshagent(['ubuntuid']) {
-                            sh 'cat /var/lib/jenkins/workspace/student-app/target/studentapp-2.2-SNAPSHOT.war | ssh root@ip-172-31-13-217 "cat > /opt/apache-tomcat-9.0.87/webapps/studentapp-2.2-SNAPSHOT.war"'
+                            sh 'cat /var/lib/jenkins/workspace/student-app/target/studentapp-2.2-SNAPSHOT.war | ssh ubuntu@ip-172-31-13-217 "cat > /opt/apache-tomcat-9.0.87/webapps/studentapp-2.2-SNAPSHOT.war"'
                     }
                 }
             }
