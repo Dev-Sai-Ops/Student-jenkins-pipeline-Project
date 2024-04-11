@@ -95,7 +95,7 @@ rpm -ivh bellsoft-jdk11.0.4-linux-amd64.rpm
 
 ### change java jdk
 ```bash 
-alternatives --config java ----#to change java jdk 
+alternatives --config java 
 ```
 
 
